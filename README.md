@@ -17,7 +17,9 @@
   - Examples
     - Code: tk/kahsolt/sqlbuilder/example/Example.java
     - Output: run `java -jar sqlbuilder.jar`
-    
+  - IDE Build
+    - Intellij artifact - JAR
+
 ## Quick Start
 ```java
 import tk.kahsolt.sqlbuilder.*;
