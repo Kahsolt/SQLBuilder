@@ -19,10 +19,11 @@ public class Example {
         SQLBuilder mysqlBuilder = new SQLBuilder(Dialect.MYSQL);
 
         System.out.println("Hello SQLBuilder! XD\n--------------------");
+        System.out.println("[FROM v0.1]");
 
-        System.out.println("\n===== [DDL] =====");
+        System.out.println("===== [DDL] =====");
         String sql = mysqlBuilder.createTable("User", true)
-                .column("id").type("INTEGER").primaryKey().end()                  // 行定义以end()结束
+                .column("id").type("INT").primaryKey().end()                  // 行定义以end()结束
                 .column("username").type("VARCHAR", 32).unique().notNull().end() // 非主键/时间戳的行默认为可空 NULL
                 .column("password").type("VARCHAR", 64).notNull().end()
                 .column("create_time").type("TIMESTAMP").initSetCurrent().end()
@@ -32,7 +33,7 @@ public class Example {
 
         // 使用惯例简化表定义
         sql = mysqlBuilder.createTable("Message")
-                .column("id").primaryKey().end()                // primaryKey 默认为 Integer + AutoIncrement
+                .column("id").autoIncrement().end()             // autoIncrement 默认为 Integer + PK
                 .column("poster").referencesTo("User").end()    // referencesTo 默认指向参考表的字段 id(小写)
                 .column("content").type(100).defaultValue("这货啥也没说...").end()    // type 默认为 VARCHAR，可仅指出长度
                 .column("likes").defaultValue(0).end()          // type 从defaultValue中推测(仅INT/FLOAT/VARCHAR)
@@ -43,26 +44,13 @@ public class Example {
 
         // 上表的SQLITE版，时间戳自动更新改写为一个TRIGGER，并忽略不受支持的参数
         sql = sqliteBuilder.createTable("Message")
-                .column("id").primaryKey().end()
+                .column("id").autoIncrement().end()
                 .column("poster").referencesTo("User").end()
                 .column("content").type(100).defaultValue("这货啥也没说...").end()
                 .column("likes").defaultValue(0).end()
                 .column("create_time").initSetCurrent().end()
                 .column("update_time").updateSetCurrent().end()
                 .engine("MyISAM").charset("utf8mb4").comment("发帖记录表，也没什么卵用").end();
-        System.out.println(sql);
-
-        // 分步建表：理解表的结构
-        Table table = sqliteBuilder.createTable("Test", true);
-        Table.Column column = new Table.Column("key");
-        column.unique();
-        column.defaultValue(0);
-        table.column(column);
-        column = new Table.Column("val");
-        column.type("FLOAT");
-        column.defaultValue(null);
-        table.column(column);
-        sql = table.end();          // 调用end()才能输出结果
         System.out.println(sql);
 
         sql = mysqlBuilder.dropTable("Message").end();  // 与SQLITE版无语法差别
@@ -75,7 +63,7 @@ public class Example {
         System.out.println(sql);
 
 
-        System.out.println("\n===== [DML] =====");
+        System.out.println("===== [DML] =====");
         sql = mysqlBuilder.insert("Test").into()     // 无参 into() 不生成插入列名表
                 .values("The", 2, "parameter").end();
         System.out.println(sql);
@@ -112,7 +100,7 @@ public class Example {
         System.out.println(sql);
 
 
-        System.out.println("\n===== [DQL] =====");
+        System.out.println("===== [DQL] =====");
         sql = mysqlBuilder.select("username", "time").from("Log")
                 .where("username").eq("kahsolt")
                 .and("date").gt("2017-5-8")
@@ -160,14 +148,56 @@ public class Example {
                 ).end();
         System.out.println(sql);
 
-
-        System.out.println("\n===== [DCL] =====");
+        System.out.println("===== [DCL] =====");
         sql = mysqlBuilder.begin()
                 .block(mysqlBuilder.insert("User").into("username", "age")  // 可以用SQLBuilder嵌套造句
                         .values("kahsolt", 13)
                         .values("luper", 31).end())
                 .block("SELECT COUNT(*) FROM User;")                              // 也可以传手写的SQL
                 .commit();                                                        // 以commit()结尾，无需end()
+        System.out.println(sql);
+
+
+        System.out.println("\n[FROM v0.2]");
+        sql = mysqlBuilder.insert("Test").into()
+                .defaultValues().end();                    // defaultValues() 产生DEFAULT VALUES
+        System.out.println(sql);
+
+        // 分步建表：理解表的结构
+        Table table = sqliteBuilder.createTable("Test", true);
+        Table.Column column = new Table.Column("key");
+        column.unique();
+        column.defaultValue(0);
+        table.column(column);
+        column = new Table.Column("val");
+        column.type("FLOAT");
+        column.defaultValue(null);
+        table.column(column);
+        sql = table.end();          // 调用end()才能输出结果
+        System.out.println(sql);
+
+
+        System.out.println("\n[FROM v0.3]");
+
+        // 支持生成含参模板(?)
+        // 可用在无参数的values()，单参数的set()，无参数的运算符函数如eq()/gt()/like()/between()等等
+        sql = mysqlBuilder.insert("Unknown")
+                .into("leave", "me", "blank").values().end();   // 产生的问号个数与into()中列数相同
+        System.out.println(sql);
+        sql = mysqlBuilder.update("People").set("me").end();
+        System.out.println(sql);
+        sql = mysqlBuilder.select("name").from("User")
+                .where("gender").eq()
+                .and("gender").between().end();
+        System.out.println(sql);
+        // 选择常量/变量
+        sql = mysqlBuilder.select("1", "Helo", "3.5").end();
+        System.out.println(sql);
+        sql = mysqlBuilder.select("@@IDENTITY").end();
+        System.out.println(sql);
+        // REPLACE
+        sql = mysqlBuilder.replace("User").into("id", "username")
+                .values(5, "hahah").end();
         System.out.println(sql);
 
         System.out.println("\n--------------------\nEnd of SQLBuilder Examples ;)");

@@ -4,7 +4,7 @@
     Hyperlight-weight sqlbuilder generating SQL of DDL(table-related), 
     DML and simple DQL; mainly aimed for SQLite3.
     
-## Introduce
+## General
     This toy tool is NOT FOR 
       - those expert in writing optimized SQL
       - who wants to take control in every details
@@ -17,22 +17,80 @@
   - Examples
     - Code: tk/kahsolt/sqlbuilder/example/Example.java
     - Output: run `java -jar sqlbuilder.jar`
+      * 实际生成的sql只有一行，下文为了方便阅读而手工调整了缩进 :) *
   - IDE Build
     - Intellij artifact - JAR
+    
+## ChangeLog
+  - v0.3
+```java
+// 1.增加defaultValues()函数，用于产生一行DEFAULT VALUES
+sqlBuilder.insert("Test").into().defaultValues().end();
+// 2.支持生成含参模板(?)，可用在无参数的values()，单参数的set()，无参数的运算符函数如eq()/gt()/like()/between()等等
+sqlBuilder.insert("Unknown").into("leave", "me", "blank").values().end();   // 产生的问号个数与into()中列数相同
+sqlBuilder.update("People").set("me").end();
+sqlBuilder.select("name").from("User")
+    .where("gender").eq()
+        .and("gender").between().end();
+// 3.选择常量/变量
+sqlBuilder.select("@@IDENTITY").end();
+// 3.支持REPLACE
+sqlBuilder.replace("User").into("id", "username")
+    .values(5, "hahah").end();
+// 4.修复外键约束生成的语法错误的BUG，增加支持设置外键删改策略
+```
+```sql
+INSERT INTO Test DEFAULT VALUES;
+
+INSERT INTO Unknown(leave, me, blank) VALUES(?, ?, ?);
+UPDATE People SET me = ?;
+SELECT name FROM User WHERE gender = ? AND gender BETWEEN ? AND ?;
+
+SELECT @@IDENTITY;
+
+REPLACE INTO User(id, username) VALUES(5, 'hahah');
+
+FOREIGN KEY(poster) REFERENCES User(id) ON UPDATE RESTRICT ON DELETE RESTRICT
+```
+
+  - v0.2
+```java
+// 1.去掉强制转子查询的sub()函数（已经可以自动判断）
+// 2.分步建表：理解表的结构
+Table table = sqlBuilder.createTable("Test", true);
+Table.Column column = new Table.Column("key");
+column.unique();
+column.defaultValue(0);
+table.column(column);
+column = new Table.Column("val");
+column.type("FLOAT");
+column.defaultValue(null);
+table.column(column);
+sql = table.end();  // 调用end()才能输出结果
+```
+```sql
+CREATE OR REPLACE TABLE Test (
+  key INTEGER UNIQUE DEFAULT 0, 
+  val FLOAT NULL
+);
+```
+
+  - v0.1
+    基本功能OK，参考下文初版Quick Start
 
 ## Quick Start
 ```java
 import tk.kahsolt.sqlbuilder.*;
 SQLBuilder sqlBuilder = new SQLBuilder();   // 默认语法为SQLITE，可传入Dialect.MYSQL
-String sqlBuilder.xxx().yyy()...zzz();      // 可使用的方法参考下文
+String sql = sqlBuilder.xxx().yyy()...zzz();// 可使用的方法参考下文
                                             // 若调用不当无法产生SQL时会抛出NullPointerException，可酌情处理
-System.out.println(sql);                    // 实际生成的sql只有一行，下文为了方便阅读而手工调整了缩进 :)
+System.out.println(sql);
 ```
 ### Table
    - CREATE
 ```java
 sqlBuilder.createTable("Message")
-    .column("id").primaryKey().end()                // primaryKey 默认为 Integer + AutoIncrement
+    .column("id").autoIncrement().end()             // autoIncrement 默认为 Integer + PK
     .column("poster").referencesTo("User").end()    // referencesTo 默认指向参考表的字段 id(小写)
     .column("content").type(100).defaultValue("这货啥也没说...").end()    // type 默认为 VARCHAR，可仅指出长度
     .column("likes").defaultValue(0).end()          // type 从defaultValue中推测(仅INT/FLOAT/VARCHAR)
@@ -68,25 +126,6 @@ CREATE TABLE IF NOT EXISTS Message (
   create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
   update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='发帖记录表，也没什么卵用';
-```
-```java
-// 分步建表：理解表的结构
-Table table = sqlBuilder.createTable("Test", true);
-Table.Column column = new Table.Column("key");
-column.unique();
-column.defaultValue(0);
-table.column(column);
-column = new Table.Column("val");
-column.type("FLOAT");
-column.defaultValue(null);
-table.column(column);
-sql = table.end();  // 调用end()才能输出结果
-```
-```sql
-CREATE OR REPLACE TABLE Test (
-  key INTEGER UNIQUE DEFAULT 0, 
-  val FLOAT NULL
-);
 ```
 
   - DROP

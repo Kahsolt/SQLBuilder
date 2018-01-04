@@ -10,9 +10,10 @@ public class Table {
 
         private String name;
         private String type;
-        private String referencesTo;
+        private boolean referencesTo;
         private Object defaultValue;
 
+        private boolean isAutoincrement = false;
         private boolean isPrimaryKey = false;
         private boolean isNotNull = false;
         private boolean isUnique = false;
@@ -25,15 +26,27 @@ public class Table {
         public Column type(long length) { this.type = String.format("VARCHAR(%d)", length); return this; }
         public Column type(String type, long length) { this.type = String.format("%s(%d)", type.toUpperCase(), length); return this; }
         public Column type(String type, long length, int precision) { this.type = String.format("%s(%d, %d)", type.toUpperCase(), length, precision); return this; }
-        public Column referencesTo(String table) { this.referencesTo = String.format("%s(id)", table); return this; }
-        public Column referencesTo(String table, String column) { this.referencesTo = String.format("%s(%s)", table, column); return this; }
         public Column defaultValue(Object defaultValue) { this.defaultValue = defaultValue; return this; }
+        public Column referencesTo(String table) { return referencesTo(table, "id", false, false); }
+        public Column referencesTo(String table, boolean isUpdateCascade, boolean isDeleteCascade) { return referencesTo(table, "id", isUpdateCascade, isDeleteCascade); }
+        public Column referencesTo(String table, String column, boolean isUpdateCascade, boolean isDeleteCascade) {   // 默认false:RESTRICT
+            referencesTo = true;
+            String actUp = "";
+            String actDel = "";
+            if(isUpdateCascade) actUp = " ON UPDATE CASCADE";
+            if(isDeleteCascade) actDel = " ON DELETE CASCADE";
+            if(this.table.constraints==null) this.table.constraints = new ArrayList<String>();
+            this.table.constraints.add(String.format("FOREIGN KEY(%s) REFERENCES %s(%s)%s%s",
+                    this.name, table, column, actUp, actDel));
+            return this;
+        }
 
+        public Column autoIncrement() { isAutoincrement = isPrimaryKey = true; return this; }
         public Column primaryKey() { isPrimaryKey = true; return this; }
+        public Column notNull() { isNotNull = true; return this; }
+        public Column unique() { isUnique = true; return this; }
         public Column initSetCurrent() { isInitSetCurrent = true; return this; }
         public Column updateSetCurrent() { isUpdateSetCurrent = isInitSetCurrent = true; return this; }
-        public Column notNull() { this.isNotNull = true; return this; }
-        public Column unique() { this.isUnique = true; return this; }
 
         public Table end() { return table; }
 
@@ -45,6 +58,7 @@ public class Table {
     private String table;
     private boolean overwrite = false;
     private ArrayList<Column> columns;
+    private ArrayList<String> constraints;
     private String engine;
     private String charset;
     private String comment;
@@ -86,7 +100,7 @@ public class Table {
                     // Type
                     if(col.isInitSetCurrent || col.isUpdateSetCurrent) {
                         segs.add("TIMESTAMP");
-                    } else if(col.isPrimaryKey || (col.type==null && col.referencesTo!=null)) {
+                    } else if(col.isAutoincrement || (col.type==null && col.referencesTo)) {
                         if(dialect == Dialect.MYSQL) segs.add("INT");
                         else segs.add("INTEGER");
                     } else if(col.type==null && col.defaultValue!=null) {
@@ -97,11 +111,14 @@ public class Table {
                             segs.add("FLOAT");
                         } else segs.add("VARCHAR");
                     } else if(col.type!=null) {
-                            segs.add(col.type);
+                        String t = col.type.trim().toUpperCase();
+                        if(dialect==Dialect.SQLITE && t.equalsIgnoreCase("INT")) segs.add("INTEGER");
+                        else segs.add(t);
                     } else segs.add("VARCHAR");
                     // PK + AI
-                    if(col.isPrimaryKey) {
-                        segs.add("PRIMARY KEY");
+                    if(col.isPrimaryKey) segs.add("PRIMARY KEY");
+                    // AI
+                    if(col.isAutoincrement) {
                         if(dialect == Dialect.MYSQL) segs.add("AUTO_INCREMENT");
                         else segs.add("AUTOINCREMENT");
                     }
@@ -126,10 +143,10 @@ public class Table {
                         if(col.defaultValue instanceof Number) segs.add(String.format("DEFAULT %s", col.defaultValue));
                         else segs.add(String.format("DEFAULT '%s'", col.defaultValue));
                     }
-                    // FK
-                    if(col.referencesTo!=null) segs.add(String.format("REFERENCES %s", col.referencesTo));
                     cols.add(String.join(" ", segs));
                 }
+                // FK
+                if(constraints!=null) cols.addAll(constraints);
                 sb.append(String.join(", ", cols));
                 sb.append(")");
                 if(dialect == Dialect.MYSQL) {
@@ -139,10 +156,10 @@ public class Table {
                 }
                 sb.append(";");
                 for (String col : triggers) {
-                    sb.append(String.format(" CREATE TRIGGER update_%s AFTER UPDATE ON %s" +
+                    sb.append(String.format(" CREATE TRIGGER update_%s_%s AFTER UPDATE ON %s" +
                             " FOR EACH ROW WHEN NEW.%s <= OLD.%s BEGIN" +
                             " UPDATE %s SET %s = CURRENT_TIMESTAMP WHERE %s = OLD.%s;" +
-                            " END;", col, table, col, col, table, col, col, col));
+                            " END;", table, col, table, col, col, table, col, col, col));
                 }
                 break;
             case DROP:
