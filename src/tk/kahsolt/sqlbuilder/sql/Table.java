@@ -41,12 +41,18 @@ public class Table {
             return this;
         }
 
-        public Column autoIncrement() { isAutoincrement = isPrimaryKey = true; return this; }
-        public Column primaryKey() { isPrimaryKey = true; return this; }
-        public Column notNull() { isNotNull = true; return this; }
-        public Column unique() { isUnique = true; return this; }
-        public Column initSetCurrent() { isInitSetCurrent = true; return this; }
-        public Column updateSetCurrent() { isUpdateSetCurrent = isInitSetCurrent = true; return this; }
+        public Column autoIncrement() { return autoIncrement(true); }
+        public Column autoIncrement(boolean enable) { if(enable) isAutoincrement = isPrimaryKey = true; return this; }
+        public Column primaryKey() { return primaryKey(true); }
+        public Column primaryKey(boolean enable) { isPrimaryKey = enable; return this; }
+        public Column notNull() { return notNull(true); }
+        public Column notNull(boolean enable) { isNotNull = enable; return this; }
+        public Column unique() { return unique(true); }
+        public Column unique(boolean enable) { isUnique = enable; return this; }
+        public Column initSetCurrent() { return initSetCurrent(true); }
+        public Column initSetCurrent(boolean enable) { isInitSetCurrent = enable; return this; }
+        public Column updateSetCurrent() { return updateSetCurrent(true); }
+        public Column updateSetCurrent(boolean enable) { if(enable) isUpdateSetCurrent = isInitSetCurrent = true; return this; }
 
         public Table end() { return table; }
 

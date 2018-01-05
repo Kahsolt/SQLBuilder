@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="-3669">
+              <first_editor relative-caret-position="194">
                 <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
                 <folding>
                   <marker date="1515067853402" expanded="true" signature="1362:1393" ph="INSERT INTO Test... " />
@@ -53,6 +53,47 @@
                 </folding>
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Query.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Query.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="552" column="16" lean-forward="true" selection-start-line="552" selection-start-column="16" selection-end-line="552" selection-end-column="16" />
+              <folding>
+                <element signature="class#Condition#0;class#Query#0" expanded="false" />
+                <element signature="class#Joint#0;class#Query#0" expanded="false" />
+                <element signature="method#set#0;class#Query#0" expanded="false" />
+                <element signature="method#set#1;class#Query#0" expanded="false" />
+                <element signature="method#where#0;class#Query#0" expanded="false" />
+                <element signature="method#where#1;class#Query#0" expanded="false" />
+                <element signature="method#where#2;class#Query#0" expanded="false" />
+                <element signature="method#end#0;class#Query#0" expanded="false" />
+                <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+                <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-85">
+              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Example.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/example/Example.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1091">
+              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -94,10 +135,10 @@
         <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/Shortcut.java" />
         <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Keyword.java" />
         <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/example/Example.java" />
-        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Query.java" />
-        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Table.java" />
-        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Table.java" />
+        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Query.java" />
+        <option value="$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java" />
       </list>
     </option>
   </component>
@@ -129,9 +170,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,10 +177,31 @@
               <item name="SQLBuilder" type="b2602c69:ProjectViewProjectNode" />
               <item name="SQLBuilder" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SQLBuilder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQLBuilder" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQLBuilder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQLBuilder" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="sqlbuilder" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SQLBuilder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SQLBuilder" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="sqlbuilder" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -301,11 +360,15 @@
       <workItem from="1514993278912" duration="405000" />
       <workItem from="1515056026941" duration="2151000" />
       <workItem from="1515066977101" duration="879000" />
+      <workItem from="1515118796976" duration="551000" />
+      <workItem from="1515134973762" duration="73000" />
+      <workItem from="1515138197928" duration="140000" />
+      <workItem from="1515138369361" duration="280000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10902000" />
+    <option name="totallyTimeSpent" value="11946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -319,19 +382,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18835099" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20045386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39898133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -353,13 +416,49 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding>
+              <marker date="1515067853402" expanded="true" signature="1362:1393" ph="INSERT INTO Test... " />
+              <marker date="1515067853402" expanded="true" signature="1396:1449" ph="INSERT INTO Unknown... " />
+              <marker date="1515067853402" expanded="true" signature="1451:1475" ph="UPDATE People... " />
+              <marker date="1515067853402" expanded="true" signature="1477:1542" ph="SELECT name User" />
+              <marker date="1515067853402" expanded="true" signature="1545:1562" ph="SELECT @@IDE... " />
+              <marker date="1515067853402" expanded="true" signature="1661:1695" ph="UPDATE RESTRICT... " />
+              <marker date="1515067853402" expanded="true" signature="1718:1766" ph="/.../" />
+              <marker date="1515067853402" expanded="true" signature="3242:3540" ph="CREATE TABLE... IF" />
+              <marker date="1515067853402" expanded="true" signature="3586:3662" ph="UPDATE ON... " />
+              <marker date="1515067853402" expanded="true" signature="3673:3759" ph="UPDATE Message... " />
+              <marker date="1515067853402" expanded="true" signature="3792:4168" ph="CREATE TABLE... IF" />
+              <marker date="1515067853402" expanded="true" signature="4242:4270" ph="DROP TABLE I... " />
+              <marker date="1515067853402" expanded="true" signature="4374:4390" ph="DELETE FROM User... " />
+              <marker date="1515067853402" expanded="true" signature="4395:4449" ph="UPDATE sqlite_sequence... " />
+              <marker date="1515067853402" expanded="true" signature="4666:4712" ph="INSERT INTO Test... " />
+              <marker date="1515067853402" expanded="true" signature="4898:4998" ph="INSERT INTO User... " />
+              <marker date="1515067853402" expanded="true" signature="5130:5172" ph="UPDATE User... " />
+              <marker date="1515067853402" expanded="true" signature="5293:5337" ph="UPDATE User... " />
+              <marker date="1515067853402" expanded="true" signature="5601:5705" ph="DELETE FROM User... " />
+              <marker date="1515067853402" expanded="true" signature="6174:6423" ph="SELECT DISTI... Order" />
+              <marker date="1515067853402" expanded="true" signature="6658:6759" ph="SELECT name User" />
+              <marker date="1515067853402" expanded="true" signature="6704:6755" ph="SELECT age F... User" />
+              <marker date="1515067853402" expanded="true" signature="7035:7146" ph="SELECT name User" />
+              <marker date="1515067853402" expanded="true" signature="7086:7142" ph="SELECT age, User" />
+              <marker date="1515067853402" expanded="true" signature="7462:7535" ph="INSERT INTO User... " />
+              <marker date="1515067853402" expanded="true" signature="7540:7565" ph="SELECT COUNT... User" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -375,6 +474,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -400,7 +502,6 @@
         <state relative-caret-position="2312">
           <caret line="146" column="17" lean-forward="true" selection-start-line="146" selection-start-column="17" selection-end-line="146" selection-end-column="17" />
           <folding>
-            <element signature="class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#referencesTo#2;class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#end#0;class#Table#0" expanded="false" />
           </folding>
@@ -411,9 +512,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -429,6 +528,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -453,9 +555,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="32" column="17" lean-forward="false" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -487,6 +587,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -495,9 +598,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="32" column="17" lean-forward="false" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -529,6 +630,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,9 +641,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -547,9 +649,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -565,6 +665,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,7 +684,6 @@
         <state relative-caret-position="1938">
           <caret line="149" column="42" lean-forward="false" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
           <folding>
-            <element signature="class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#referencesTo#2;class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#end#0;class#Table#0" expanded="false" />
           </folding>
@@ -600,6 +702,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -616,6 +721,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -639,6 +747,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -662,6 +773,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -685,6 +799,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -725,6 +842,9 @@
             <element signature="method#where#0;class#Query#0" expanded="false" />
             <element signature="method#where#1;class#Query#0" expanded="false" />
             <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -734,7 +854,6 @@
         <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
-            <element signature="class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#referencesTo#2;class#Column#0;class#Table#0" expanded="false" />
             <element signature="method#end#0;class#Table#0" expanded="false" />
           </folding>
@@ -753,9 +872,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -789,45 +906,22 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/Shortcut.java" />
-    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#1521#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/example/Example.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="198" column="16" lean-forward="false" selection-start-line="198" selection-start-column="16" selection-end-line="199" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Query.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="259" column="5" lean-forward="false" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
-          <folding>
-            <element signature="class#Condition#0;class#Query#0" expanded="false" />
-            <element signature="class#Joint#0;class#Query#0" expanded="false" />
-            <element signature="method#set#0;class#Query#0" expanded="false" />
-            <element signature="method#set#1;class#Query#0" expanded="false" />
-            <element signature="method#where#0;class#Query#0" expanded="false" />
-            <element signature="method#where#1;class#Query#0" expanded="false" />
-            <element signature="method#where#2;class#Query#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
+        <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="method#referencesTo#2;class#Column#0;class#Table#0" expanded="false" />
+            <element signature="method#end#0;class#Table#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -847,22 +941,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Table.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/sql/Query.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="69" column="20" lean-forward="true" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
+        <state relative-caret-position="417">
+          <caret line="552" column="16" lean-forward="true" selection-start-line="552" selection-start-column="16" selection-end-line="552" selection-end-column="16" />
           <folding>
-            <element signature="class#Column#0;class#Table#0" expanded="false" />
-            <element signature="method#referencesTo#2;class#Column#0;class#Table#0" expanded="false" />
-            <element signature="method#end#0;class#Table#0" expanded="false" />
+            <element signature="class#Condition#0;class#Query#0" expanded="false" />
+            <element signature="class#Joint#0;class#Query#0" expanded="false" />
+            <element signature="method#set#0;class#Query#0" expanded="false" />
+            <element signature="method#set#1;class#Query#0" expanded="false" />
+            <element signature="method#where#0;class#Query#0" expanded="false" />
+            <element signature="method#where#1;class#Query#0" expanded="false" />
+            <element signature="method#where#2;class#Query#0" expanded="false" />
+            <element signature="method#end#0;class#Query#0" expanded="false" />
+            <element signature="method#buildClause#0;class#Query#0" expanded="false" />
+            <element signature="method#buildSubqueryRefiner#0;class#Query#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/SQLBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/kahsolt/sqlbuilder/example/Example.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1091">
+          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-3669">
+          <first_editor relative-caret-position="194">
             <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
             <folding>
               <marker date="1515067853402" expanded="true" signature="1362:1393" ph="INSERT INTO Test... " />

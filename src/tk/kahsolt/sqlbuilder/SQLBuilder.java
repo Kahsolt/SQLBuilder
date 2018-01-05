@@ -2,8 +2,8 @@
  * Copyright (c)
  * Author : Kahsolt <kahsolt@qq.com>
  * Create Date : 2018-1-1
- * Update Date : 2018-1-4
- * Version : 0.3
+ * Update Date : 2018-1-5
+ * Version : 0.3.2
  * License : GPLv3
  * Description : 生成器主类，实例化它然后就可以用了
  */

@@ -546,12 +546,10 @@ public class Query {
         this.distinct = distinct;
         return this;
     }
-
     public Query setColumns(String... columns) {
         this.columns = String.join(", ", Arrays.asList(columns));
         return this;
     }
-
     public Query setKeyword(Keyword keyword) {
         this.keyword = keyword;
         return this;
