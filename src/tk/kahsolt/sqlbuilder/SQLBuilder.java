@@ -2,8 +2,8 @@
  * Copyright (c)
  * Author : Kahsolt <kahsolt@qq.com>
  * Create Date : 2018-1-1
- * Update Date : 2018-1-5
- * Version : 0.3.2
+ * Update Date : 2018-1-6
+ * Version : 0.3.3
  * License : GPLv3
  * Description : 生成器主类，实例化它然后就可以用了
  */
@@ -22,6 +22,7 @@ public class SQLBuilder {
     // DDL
     public Table createTable(String table) { return createTable(table, false); }
     public Table createTable(String table, boolean overwrite) { return new Table(table).dialect(dialect).overwrite(overwrite); }
+    public Table alterTable(String table) { return new Table(table, Keyword.ALTER); }
     public Table dropTable(String table) { return new Table(table, Keyword.DROP); }
     public Table truncateTable(String table) { return new Table(table, Keyword.TRUNCATE).dialect(dialect); }
 

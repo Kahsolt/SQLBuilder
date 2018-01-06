@@ -199,6 +199,12 @@ public class Example {
         sql = mysqlBuilder.replace("User").into("id", "username")
                 .values(5, "hahah").end();
         System.out.println(sql);
+        // ALTER TABLE ADD COLUMN
+        sql = mysqlBuilder.alterTable("Player")
+                .add("moe").type("INT").defaultValue(0).end()   // this one closes add()
+                .add("warui").type("FLOAT").notNull().end()
+                .end(); // this one closes alterTable()
+        System.out.println(sql);
 
         System.out.println("\n--------------------\nEnd of SQLBuilder Examples ;)");
 

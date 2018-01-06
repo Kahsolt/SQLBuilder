@@ -35,8 +35,8 @@ public class Table {
             String actDel = "";
             if(isUpdateCascade) actUp = " ON UPDATE CASCADE";
             if(isDeleteCascade) actDel = " ON DELETE CASCADE";
-            if(this.table.constraints==null) this.table.constraints = new ArrayList<String>();
-            this.table.constraints.add(String.format("FOREIGN KEY(%s) REFERENCES %s(%s)%s%s",
+            if(this.table.foreignkeys ==null) this.table.foreignkeys = new ArrayList<String>();
+            this.table.foreignkeys.add(String.format("FOREIGN KEY(%s) REFERENCES %s(%s)%s%s",
                     this.name, table, column, actUp, actDel));
             return this;
         }
@@ -64,7 +64,7 @@ public class Table {
     private String table;
     private boolean overwrite = false;
     private ArrayList<Column> columns;
-    private ArrayList<String> constraints;
+    private ArrayList<String> foreignkeys;
     private String engine;
     private String charset;
     private String comment;
@@ -90,69 +90,26 @@ public class Table {
         columns.add(column);
         return this;
     }
+    public Column add(String name) {
+        if(columns==null) columns = new ArrayList<>();
+        Column column = new Column(name, this);
+        columns.add(column);
+        return column;
+    }
 
     public String end() {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> triggers = new ArrayList<>();    // create trigger for SQLite TIMESTAMP fields
+        ArrayList<String> cols;
         switch (keyword) {
             case CREATE:
                 if(overwrite) sb.append(String.format("CREATE OR REPLACE TABLE %s (", table));
                 else sb.append(String.format("CREATE TABLE IF NOT EXISTS %s (", table));
-                ArrayList<String> cols = new ArrayList<>();
-                for (Column col : columns) {
-                    ArrayList<String> segs = new ArrayList<>();
-                    // Name
-                    segs.add(col.name);
-                    // Type
-                    if(col.isInitSetCurrent || col.isUpdateSetCurrent) {
-                        segs.add("TIMESTAMP");
-                    } else if(col.isAutoincrement || (col.type==null && col.referencesTo)) {
-                        if(dialect == Dialect.MYSQL) segs.add("INT");
-                        else segs.add("INTEGER");
-                    } else if(col.type==null && col.defaultValue!=null) {
-                        if(col.defaultValue instanceof Integer || col.defaultValue instanceof Short || col.defaultValue instanceof Long) {
-                            if(dialect == Dialect.MYSQL) segs.add("INT");
-                            else segs.add("INTEGER");
-                        } else if(col.defaultValue instanceof Double || col.defaultValue instanceof Float) {
-                            segs.add("FLOAT");
-                        } else segs.add("VARCHAR");
-                    } else if(col.type!=null) {
-                        String t = col.type.trim().toUpperCase();
-                        if(dialect==Dialect.SQLITE && t.equalsIgnoreCase("INT")) segs.add("INTEGER");
-                        else segs.add(t);
-                    } else segs.add("VARCHAR");
-                    // PK + AI
-                    if(col.isPrimaryKey) segs.add("PRIMARY KEY");
-                    // AI
-                    if(col.isAutoincrement) {
-                        if(dialect == Dialect.MYSQL) segs.add("AUTO_INCREMENT");
-                        else segs.add("AUTOINCREMENT");
-                    }
-                    // UQ
-                    if(col.isUnique) segs.add("UNIQUE");
-                    // NN
-                    if(col.isNotNull) segs.add("NOT NULL");
-                    else if(!col.isPrimaryKey && !col.isInitSetCurrent && col.defaultValue==null) segs.add("NULL");
-                    // CT/OUCT for Timestamp
-                    switch (dialect) {
-                        case SQLITE:
-                            if(col.isInitSetCurrent) segs.add("DEFAULT CURRENT_TIMESTAMP");
-                            if(col.isUpdateSetCurrent) triggers.add(col.name);
-                            break;
-                        case MYSQL:
-                            if(col.isInitSetCurrent) segs.add("DEFAULT CURRENT_TIMESTAMP");
-                            if(col.isUpdateSetCurrent) segs.add("ON UPDATE CURRENT_TIMESTAMP");
-                            break;
-                    }
-                    // DEFAULT
-                    if(col.defaultValue!=null) {
-                        if(col.defaultValue instanceof Number) segs.add(String.format("DEFAULT %s", col.defaultValue));
-                        else segs.add(String.format("DEFAULT '%s'", col.defaultValue));
-                    }
-                    cols.add(String.join(" ", segs));
-                }
-                // FK
-                if(constraints!=null) cols.addAll(constraints);
+                cols = new ArrayList<>();
+                // column def
+                for (Column col : columns) cols.add(buildColumn(col, triggers));
+                // table FK constraint
+                if(foreignkeys!=null) cols.addAll(foreignkeys);
                 sb.append(String.join(", ", cols));
                 sb.append(")");
                 if(dialect == Dialect.MYSQL) {
@@ -160,6 +117,19 @@ public class Table {
                     if(charset!=null) sb.append(String.format(" DEFAULT CHARSET=%s", charset));
                     if(comment!=null) sb.append(String.format(" COMMENT='%s'", comment));
                 }
+                sb.append(";");
+                for (String col : triggers) {
+                    sb.append(String.format(" CREATE TRIGGER update_%s_%s AFTER UPDATE ON %s" +
+                            " FOR EACH ROW WHEN NEW.%s <= OLD.%s BEGIN" +
+                            " UPDATE %s SET %s = CURRENT_TIMESTAMP WHERE %s = OLD.%s;" +
+                            " END;", table, col, table, col, col, table, col, col, col));
+                }
+                break;
+            case ALTER:
+                sb.append(String.format("ALTER TABLE %s ADD ", table));
+                cols = new ArrayList<>();
+                for (Column col : columns) cols.add(buildColumn(col, triggers));
+                sb.append(String.join(", ", cols));
                 sb.append(";");
                 for (String col : triggers) {
                     sb.append(String.format(" CREATE TRIGGER update_%s_%s AFTER UPDATE ON %s" +
@@ -186,6 +156,59 @@ public class Table {
                 break;
         }
         return sb.toString();
+    }
+
+    private String buildColumn(Column col, ArrayList<String> triggers) {
+        ArrayList<String> segs = new ArrayList<>();
+        // Name
+        segs.add(col.name);
+        // Type
+        if(col.isInitSetCurrent || col.isUpdateSetCurrent) {
+            segs.add("TIMESTAMP");
+        } else if(col.isAutoincrement || (col.type==null && col.referencesTo)) {
+            if(dialect == Dialect.MYSQL) segs.add("INT");
+            else segs.add("INTEGER");
+        } else if(col.type==null && col.defaultValue!=null) {
+            if(col.defaultValue instanceof Integer || col.defaultValue instanceof Short || col.defaultValue instanceof Long) {
+                if(dialect == Dialect.MYSQL) segs.add("INT");
+                else segs.add("INTEGER");
+            } else if(col.defaultValue instanceof Double || col.defaultValue instanceof Float) {
+                segs.add("FLOAT");
+            } else segs.add("VARCHAR");
+        } else if(col.type!=null) {
+            String t = col.type.trim().toUpperCase();
+            if(dialect==Dialect.SQLITE && t.equalsIgnoreCase("INT")) segs.add("INTEGER");
+            else segs.add(t);
+        } else segs.add("VARCHAR");
+        // PK + AI
+        if(col.isPrimaryKey) segs.add("PRIMARY KEY");
+        // AI
+        if(col.isAutoincrement) {
+            if(dialect == Dialect.MYSQL) segs.add("AUTO_INCREMENT");
+            else segs.add("AUTOINCREMENT");
+        }
+        // UQ
+        if(col.isUnique) segs.add("UNIQUE");
+        // NN
+        if(col.isNotNull) segs.add("NOT NULL");
+        else if(!col.isPrimaryKey && !col.isInitSetCurrent && col.defaultValue==null) segs.add("NULL");
+        // CT/OUCT for Timestamp
+        switch (dialect) {
+            case SQLITE:
+                if(col.isInitSetCurrent) segs.add("DEFAULT CURRENT_TIMESTAMP");
+                if(col.isUpdateSetCurrent) triggers.add(col.name);
+                break;
+            case MYSQL:
+                if(col.isInitSetCurrent) segs.add("DEFAULT CURRENT_TIMESTAMP");
+                if(col.isUpdateSetCurrent) segs.add("ON UPDATE CURRENT_TIMESTAMP");
+                break;
+        }
+        // DEFAULT
+        if(col.defaultValue!=null) {
+            if(col.defaultValue instanceof Number) segs.add(String.format("DEFAULT %s", col.defaultValue));
+            else segs.add(String.format("DEFAULT '%s'", col.defaultValue));
+        }
+        return String.join(" ", segs);
     }
 
 }

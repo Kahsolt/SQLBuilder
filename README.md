@@ -22,6 +22,19 @@
     - Intellij artifact - JAR
     
 ## ChangeLog
+  - v0.3.3
+```java
+// 1.一些细节bugfix
+// 2.增加ALTER TABLE ADD COLUMN
+sqlBuilder.alterTable("Player")
+    .add("moe").type("INT").defaultValue(0).end()   // this one closes add()
+    .add("warui").type("FLOAT").notNull().end()
+    .end(); // this one closes alterTable()
+```
+```sql
+ALTER TABLE Player ADD moe INTEGER DEFAULT 0, warui FLOAT NOT NULL;
+```
+
   - v0.3
 ```java
 // 1.增加defaultValues()函数，用于产生一行DEFAULT VALUES

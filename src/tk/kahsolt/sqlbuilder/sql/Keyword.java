@@ -1,7 +1,7 @@
 package tk.kahsolt.sqlbuilder.sql;
 
 public enum Keyword {
-    CREATE, DROP, TRUNCATE,
+    CREATE, DROP, ALTER, TRUNCATE,
     SELECT, JOIN, GROUP_BY, HAVING,
     INSERT, REPLACE, VALUES,
     UPDATE, SET,
