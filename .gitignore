@@ -1,0 +1,5 @@
+# project meta
+.idea/
+
+# compiled
+out/
